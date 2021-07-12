@@ -1,0 +1,20 @@
+# IDEs
+.idea
+.vscode
+.editorconfig
+
+# After-build files
+dist/tsconfig.tsbuildinfo
+types/tsconfig.tsbuildinfo
+
+# Development files
+.eslintignore
+.eslintrc.json
+commitlint.config.js
+jest.config.js
+tsconfig.json
+
+# Other
+tests
+.github
+.husky

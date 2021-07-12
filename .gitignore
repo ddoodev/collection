@@ -1,0 +1,10 @@
+# IDEs
+.idea
+.vscode
+
+# Dependencies
+node_modules
+
+# Build
+dist
+types

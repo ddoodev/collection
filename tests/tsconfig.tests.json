@@ -1,0 +1,7 @@
+// this tsconfig used just for avoid JetBrains IDE warning about non-included typescript files
+{
+  "extends": "../tsconfig.json",
+  "include": [
+    "./**/*"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "@discordoo/collection",
+  "version": "1.0.0",
+  "description": "An utility data structure used within the Discordoo.",
+  "main": "dist/src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "lint": "eslint tests src",
+    "lint:fix": "eslint tests src --fix",
+    "test": "jest",
+    "prepublishOnly": "npm run build",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Discordoo/collection.git"
+  },
+  "author": "Mirdukkk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Discordoo/collection/issues"
+  },
+  "homepage": "https://github.com/Discordoo/collection#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^12.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "eslint": "^7.30.0",
+    "husky": "^6.0.0",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "tscpaths": "0.0.9",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.5"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "optionalDependencies": {
+    "lodash": "^4.17.21"
+  }
+}

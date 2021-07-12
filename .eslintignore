@@ -1,0 +1,11 @@
+# IDEs
+.idea
+.vscode
+
+# Build
+dist
+types
+
+# Other
+docs
+.github
