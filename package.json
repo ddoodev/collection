@@ -1,8 +1,9 @@
 {
   "name": "@discordoo/collection",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An utility data structure used within the Discordoo.",
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "type": "commonjs",
   "scripts": {
     "build": "tsc -p tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
