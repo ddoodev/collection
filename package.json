@@ -1,6 +1,6 @@
 {
   "name": "@discordoo/collection",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An utility data structure used within the Discordoo.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
