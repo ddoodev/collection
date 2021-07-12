@@ -6,7 +6,7 @@
   "types": "types/index.d.ts",
   "type": "commonjs",
   "scripts": {
-    "build": "tsc -p tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "build": "tsc -p tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist && tscpaths -p tsconfig.json -s ./src -o ./types",
     "lint": "eslint tests src",
     "lint:fix": "eslint tests src --fix",
     "test": "jest",
