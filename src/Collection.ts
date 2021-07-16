@@ -14,8 +14,57 @@ try {
 } catch (e) {} // eslint-disable-line no-empty
 
 
-/** An utility data structure used within the library */
+/**
+ * An utility data structure used within the Discordoo.
+ * */
 export class Collection<K = any, V = any> extends Map<K, V> {
+
+  /**
+   * Gets element from collection.
+   * @param key - key of element
+   * */
+  get(key: K): V | undefined {
+    return super.get(key)
+  }
+
+  /**
+   * Sets a new element in the collection.
+   * @param key - key of element
+   * @param value - value (element) to set
+   * */
+  set(key: K, value: V): this {
+    return super.set(key, value)
+  }
+
+  /**
+   * Checks if an element exists in the collection.
+   * @param key - key of element
+   * */
+  has(key: K): boolean {
+    return super.has(key)
+  }
+
+  /**
+   * Removes element from the collection.
+   * @param key - key of element
+   * */
+  delete(key: K): boolean {
+    return super.delete(key)
+  }
+
+  /**
+   * Removes all elements from the collection.
+   * */
+  clear() {
+    return super.clear()
+  }
+
+  /**
+   * The amount of elements in this collection.
+   * */
+  get size(): number {
+    return super.size
+  }
 
   /**
    * The collection is empty or not.
@@ -25,13 +74,18 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Gets a random element from collection (returns non-unique results if the unique option is not specified).
+   * Gets a random element from collection (returns non-unique results by default, see options).
    * */
   random(): V
-  random(amount: number, options?: CollectionRandomOptions): V[]
-  random(amount?: number, options?: CollectionRandomOptions): V | V[]
-  random(amount?: number, options: CollectionRandomOptions = {}): V | V[] {
-    const size = this.size
+  random(amount: number): V[]
+  random<T extends Array<V>>(amount: number, options: CollectionRandomOptions): V[]
+  random<T extends Array<K>>(amount: number, options: CollectionRandomOptions): K[]
+  random<T extends Array<[ K, V ]>>(amount: number, options: CollectionRandomOptions): Array<[ K, V ]>
+  random<T extends V>(amount: undefined, options: CollectionRandomOptions): V
+  random<T extends K>(amount: undefined, options: CollectionRandomOptions): K
+  random<T extends [ K, V ]>(amount: undefined, options: CollectionRandomOptions): [ K, V ]
+  random(amount?: number, options: CollectionRandomOptions = {}): V  | K | [ K, V ] | V[] | K[] | Array<[ K, V ]> {
+    const size = this.size, initialAmount = amount
 
     if (size < 1) throw new Error('Collection#random: Cannot get random elements from the empty collection')
     if (amount && amount > size) amount = size
@@ -40,8 +94,8 @@ export class Collection<K = any, V = any> extends Map<K, V> {
 
     // switches the random numbers generation algorithm depending on the size of the collection and the size of the amount
     const largeAmount: boolean = Math.floor(amount / size * 100) > (size > 500 ? size > 1000 ? 15 : 50 : 80),
-      arr = [ ...this.values() ]
-    let results: V[] = []
+      arr = [ ...this.entries() ]
+    let results: Array<[ K, V ]> = []
 
     // O(1) generation algorithm, https://stackoverflow.com/questions/196017/unique-non-repeating-random-numbers-in-o1
     if (largeAmount && options.unique) {
@@ -76,7 +130,25 @@ export class Collection<K = any, V = any> extends Map<K, V> {
       results = random.map(r => arr[r])
     }
 
-    return amount <= 1 ? results[0] : results
+    let result: V[] | K[] | Array<[ K, V ]>
+
+    switch (options?.returnType) {
+      case 'keys':
+        result = results.map(r => r[0])
+        break
+      case 'blocks':
+        result = results
+        break
+      case 'values':
+      default:
+        result = results.map(r => r[1])
+    }
+
+    if ((typeof initialAmount === 'number' && initialAmount <= 1) || typeof initialAmount !== 'number') {
+      return result[0]
+    }
+
+    return result
   }
 
   /**
@@ -84,13 +156,17 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * @param filter - function to use
    * @param options - filter options
    */
-  filter<T>(
-    filter: Predicate<K, V, Collection<K, V>>,
-    options?: CollectionFilterOptions
-  ): T extends Array<any> ? Array<[ K, V ]> : T
+  filter<T extends Array<[ K, V ]> = Array<[ K, V ]>>(
+    filter: Predicate<K, V, Collection<K, V>>, options?: CollectionFilterOptions
+  ): Array<[ K, V ]>
+  filter<T extends Map<K, V> = Map<K, V>>(
+    filter: Predicate<K, V, Collection<K, V>>, options?: CollectionFilterOptions
+  ): Map<K, V>
+  filter<T extends Collection = Collection<K, V>>(
+    filter: Predicate<K, V, Collection<K, V>>, options?: CollectionFilterOptions
+  ): Collection<K, V>
   filter(
-    filter: Predicate<K, V, Collection<K, V>>,
-    options: CollectionFilterOptions = {}
+    filter: Predicate<K, V, Collection<K, V>>, options: CollectionFilterOptions = {}
   ): Collection<K, V> | Array<[ K, V ]> | Map<K, V> {
     let results, predicate: Predicate<K, V, Collection<K, V>>
 
@@ -118,7 +194,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Searches to the element in collection and returns it
+   * Searches to the element in collection and returns it.
    * @param predicate - function to use
    * */
   find(predicate: Predicate<K, V, Collection<K, V>, boolean>): V | null {
@@ -287,7 +363,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Maps each item to another value into an array
+   * Maps each item to another value into an array.
    * @param predicate - function to use
    * */
   map<T = unknown>(predicate: Predicate<K, V, Collection<K, V>, T>): T[] {
