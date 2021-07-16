@@ -1,6 +1,6 @@
 {
   "name": "@discordoo/collection",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "An utility data structure used within the Discordoo.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/Discordoo/collection/issues"
   },
-  "homepage": "https://github.com/Discordoo/collection#readme",
+  "homepage": "https://docs.discordoo.xyz/collection/",
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
@@ -47,8 +47,5 @@
   },
   "engines": {
     "node": ">=12.0.0"
-  },
-  "optionalDependencies": {
-    "lodash": "^4.17.21"
   }
 }

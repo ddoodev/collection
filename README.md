@@ -6,6 +6,11 @@ Collection was created for use inside Discordoo, for storing the cache in it and
 
 We decided to put the Collection in a separate repository, so that third-party developers can use it without installing the entire Discordoo.
 
+## Quick Reference
+* [Collection API Documentation](https://docs.discordoo.xyz/collection)
+* Optionally lodash may be installed for deep equal processing
+* Node.js 12.0.0 or newer required
+
 ## Examples
 
 #### How to use collection filter:
