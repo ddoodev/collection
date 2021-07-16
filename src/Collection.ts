@@ -74,16 +74,45 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Gets a random element from collection (returns non-unique results by default, see options).
+   * Gets a random value from collection.
    * */
   random(): V
+
+  /**
+   * Gets a random values from collection.
+   * */
   random(amount: number): V[]
+
+  /**
+   * Gets a random values from collection (returnType values option is specified).
+   * */
   random<T extends Array<V>>(amount: number, options: CollectionRandomOptions): V[]
+
+  /**
+   * Gets a random keys from collection (returnType keys option is specified).
+   * */
   random<T extends Array<K>>(amount: number, options: CollectionRandomOptions): K[]
+
+  /**
+   * Gets a random blocks from collection (returnType blocks option is specified).
+   * */
   random<T extends Array<[ K, V ]>>(amount: number, options: CollectionRandomOptions): Array<[ K, V ]>
+
+  /**
+   * Gets a random value from collection (returnType values option is specified, amount not provided).
+   * */
   random<T extends V>(amount: undefined, options: CollectionRandomOptions): V
+
+  /**
+   * Gets a random key from collection (returnType keys option is specified, amount not provided).
+   * */
   random<T extends K>(amount: undefined, options: CollectionRandomOptions): K
+
+  /**
+   * Gets a random block from collection (returnType block option is specified, amount not provided).
+   * */
   random<T extends [ K, V ]>(amount: undefined, options: CollectionRandomOptions): [ K, V ]
+
   random(amount?: number, options: CollectionRandomOptions = {}): V  | K | [ K, V ] | V[] | K[] | Array<[ K, V ]> {
     const size = this.size, initialAmount = amount
 
@@ -152,19 +181,32 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Filters out the elements which don't meet requirements.
+   * Filters out the elements which don't meet requirements and returns array (default).
    * @param filter - function to use
    * @param options - filter options
    */
   filter<T extends Array<[ K, V ]> = Array<[ K, V ]>>(
     filter: Predicate<K, V, Collection<K, V>>, options?: CollectionFilterOptions
   ): Array<[ K, V ]>
+
+  /**
+   * Filters out the elements which don't meet requirements and returns map (return map option is specified).
+   * @param filter - function to use
+   * @param options - filter options
+   */
   filter<T extends Map<K, V> = Map<K, V>>(
-    filter: Predicate<K, V, Collection<K, V>>, options?: CollectionFilterOptions
+    filter: Predicate<K, V, Collection<K, V>>, options: CollectionFilterOptions
   ): Map<K, V>
+
+  /**
+   * Filters out the elements which don't meet requirements and returns collection (return collection option is specified).
+   * @param filter - function to use
+   * @param options - filter options
+   */
   filter<T extends Collection = Collection<K, V>>(
-    filter: Predicate<K, V, Collection<K, V>>, options?: CollectionFilterOptions
+    filter: Predicate<K, V, Collection<K, V>>, options: CollectionFilterOptions
   ): Collection<K, V>
+
   filter(
     filter: Predicate<K, V, Collection<K, V>>, options: CollectionFilterOptions = {}
   ): Collection<K, V> | Array<[ K, V ]> | Map<K, V> {
@@ -295,10 +337,15 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Returns first N collection values.
+   * Returns first collection value if it exists.
    * */
   first(): V | undefined
+
+  /**
+   * Returns first N collection values.
+   * */
   first(amount: number): V[]
+
   first(amount?: number): V | V[] | undefined {
     if (!amount || amount <= 1) {
       return this.values().next().value
@@ -312,10 +359,15 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Returns first N collection keys.
+   * Returns first collection key if it exists.
    * */
   firstKey(): K | undefined
+
+  /**
+   * Returns first N collection keys.
+   * */
   firstKey(amount: number): K[]
+
   firstKey(amount?: number): K | K[] | undefined {
     if (!amount || amount <= 1) {
       return this.keys().next().value
@@ -329,10 +381,15 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Returns last N collection values.
+   * Returns last collection value if it exists.
    * */
   last(): V | undefined
+
+  /**
+   * Returns last N collection values.
+   * */
   last(amount: number): V[]
+
   last(amount?: number): V | V[] | undefined {
     const values = [ ...this.values() ]
 
@@ -346,10 +403,15 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Returns last N collection keys.
+   * Returns last collection key if it exists.
    * */
   lastKey(): K | undefined
+
+  /**
+   * Returns first N collection keys.
+   * */
   lastKey(amount: number): K[]
+
   lastKey(amount?: number): K | K[] | undefined {
     const keys = [ ...this.keys() ]
 
