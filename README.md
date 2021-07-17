@@ -8,7 +8,7 @@ We decided to put the Collection in a separate repository, so that third-party d
 
 ## Quick Reference
 * [Collection API Documentation](https://docs.discordoo.xyz/collection)
-* Optionally lodash may be installed for deep equal processing
+* Optionally lodash can be installed for deep equal processing
 * Node.js 12.0.0 or newer required
 
 ## Examples
@@ -45,6 +45,13 @@ filtered.forEach(v => console.log(v[1])) // log all values of filtered elements
  * turns into this
  * [ [ 1, 2 ], [ 3, 4 ], [ 5, 6 ] ]
  * */
+
+const fn = (value, key, collection) => key % 2 !== 0
+
+// also you can choose in wich format return filtered values
+collection.filter(fn, { return: 'map' }) // return data stored in javascript Map
+collection.filter(fn, { return: 'collection' }) // return data stored in collection
+collection.filter(fn, { return: 'array' }) // return data stored in array (default)
 ```
 
 #### How to use filter option 'return' for typescript users:
@@ -59,7 +66,7 @@ console.log(collection.filter<Array<any>>   (fn, { return: 'array' })     .lengt
 console.log(collection.filter(fn).length) // default to Array<[ K, V ]>
 ```
 
-#### How to use collection random
+#### How to use collection random:
 ```ts
 import { Collection } from '@discordoo/collection'
 
@@ -69,7 +76,24 @@ collection.random() // get 1 random value from collection
 const values = collection.random(32) // get 32 random values from collection
 console.log(values) // [ value, value, value ]
 
-// get random elements, not values from collection
+// get random keys from collection
+collection.random(11, { returnType: 'keys' })
+// get random key from collection
+collection.random(undefined /* or 1 */, { returnType: 'keys' })
+```
+
+#### How to use collection random returnType option for typescript users:
+```ts
+import { Collection } from '@discordoo/collection'
+
+type K = number
+type V = string
+
+const collection = new Collection<K, V>() // number - key, string - value
+
+collection.random<K[]>(5, { returnType: 'keys' }) // tell typescript that we are expect array of collection keys
+collection.random<[ K, V ]>(undefined, { returnType: 'blocks' }) // tell typescript that we are expect 1 block
+collection.random<Array<[ K, V ]>>(5, { returnType: 'blocks' }) // tell typescript that we are expect array of blocks
 ```
 
 
