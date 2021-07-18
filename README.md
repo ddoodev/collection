@@ -101,18 +101,23 @@ collection.random<Array<[ K, V ]>>(5, { returnType: 'blocks' }) // tell typescri
 Discord.js is the most popular library for developing bots, so we will compare with it.
 (if you're interested, ddoo is roughly comparable to eris in collection speed)
 
+Higher is better.
+
 ### Test: get random elements from collection
-1. [100 elements in collection, 5 random elements](https://jsben.ch/mNKer)
-2. [800 elements in collection, 150 random elements](https://jsben.ch/en4FL)
-3. [10000 elements in collection, 1000 random elements](https://jsben.ch/86Fpd)
-4. [10000 elements in collection, 8000 random elements](https://jsben.ch/q5IXT)
+1. [100 elements in collection, 5 random elements](https://jsben.ch/mNKer) | [result](https://user-images.githubusercontent.com/44965055/126082272-a3e09d46-a67e-41f8-b000-b8315243c68e.png)
+2. [800 elements in collection, 150 random elements](https://jsben.ch/en4FL) | [result](https://user-images.githubusercontent.com/44965055/126082328-312d7d77-f409-49fc-b382-dfb972b66567.png)
+3. [10000 elements in collection, 1000 random elements](https://jsben.ch/86Fpd) | [result](https://user-images.githubusercontent.com/44965055/126082356-09a8bcc8-8bdd-4310-a6c2-e25674768a4c.png)
+4. [10000 elements in collection, 8000 random elements](https://jsben.ch/q5IXT) | [result](https://user-images.githubusercontent.com/44965055/126082376-3a1e3c5d-3ab5-4c93-b8b3-a7c58cfe3deb.png)
+
 
 ### Test: filter 50% of elements from collection
-1. [100 elements in collection](https://jsben.ch/coBir)
-2. [800 elements in collection](https://jsben.ch/UcXNJ)
-3. [10000 elements in collection](https://jsben.ch/GYwWj)
+1. [100 elements in collection](https://jsben.ch/coBir) | [result](https://user-images.githubusercontent.com/44965055/126082408-3ab9357b-36c4-4813-8905-f7b1b18f085d.png)
+2. [800 elements in collection](https://jsben.ch/UcXNJ) | [result](https://user-images.githubusercontent.com/44965055/126082429-9bf00f20-b2a8-4566-a638-1d72193ce9ba.png)
+3. [10000 elements in collection](https://jsben.ch/GYwWj) | [result](https://user-images.githubusercontent.com/44965055/126082458-7850537a-db4f-4877-ae6f-0972f1508a02.png)
+
 
 ### Test: map collection elements
-1. [100 elements in collection](https://jsben.ch/Gqp0P)
-2. [800 elements in collection](https://jsben.ch/NNGE4)
-3. [10000 elements in collection](https://jsben.ch/rMMWl)
+1. [100 elements in collection](https://jsben.ch/Gqp0P) | [result](https://user-images.githubusercontent.com/44965055/126082472-6193b745-788f-4194-8355-4e52156b1f5c.png)
+2. [800 elements in collection](https://jsben.ch/NNGE4) | [result](https://user-images.githubusercontent.com/44965055/126082498-2acc5ad3-0f22-4bb0-b6f6-9c455aca9c83.png)
+3. [10000 elements in collection](https://jsben.ch/rMMWl) | [result](https://user-images.githubusercontent.com/44965055/126082513-32c06b67-9725-4d83-b1de-7224ce822ec9.png)
+
