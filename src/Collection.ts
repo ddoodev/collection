@@ -6,6 +6,7 @@ import { equalFn } from '@src/interfaces/equalFn'
 import { intoChunks } from '@src/utils/intoChunks'
 import { range } from '@src/utils/range'
 import { swap } from '@src/utils/swap'
+import { CollectionConstructor } from '@src/interfaces/CollectionConstrcutor'
 
 let lodashIsEqual: equalFn
 
@@ -18,6 +19,11 @@ try {
  * An utility data structure used within the Discordoo.
  * */
 export class Collection<K = any, V = any> extends Map<K, V> {
+  /**
+   * The Collection() constructor creates {@link Collection} objects.
+   * @param iterable - An Array or other iterable object whose elements are key-value pairs such as [ [ 1, 'one' ], [ 2, 'two' ] ].
+   * */
+  [ 'constructor' ]: CollectionConstructor
 
   /**
    * Gets element from collection.
@@ -239,16 +245,16 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Searches to the element in collection and returns it.
    * @param predicate - function to use
    * */
-  find(predicate: Predicate<K, V, Collection<K, V>, boolean>): V | null {
+  find(predicate: Predicate<K, V, Collection<K, V>, boolean>): V | undefined {
     for (const [ key, value ] of this.entries()) {
       if (predicate(value, key, this)) return value
     }
 
-    return null
+    return undefined
   }
 
   /**
-   * Executes a function on each of elements of map.
+   * Executes a function on each of elements of collection.
    * @param predicate - function to use
    */
   forEach(predicate: Predicate<K, V, Collection<K, V>>) {
