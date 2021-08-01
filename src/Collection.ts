@@ -1,12 +1,10 @@
 import { CollectionFilterOptions } from '@src/interfaces/CollectionFilterOptions'
 import { CollectionRandomOptions } from '@src/interfaces/CollectionRandomOptions'
 import { CollectionEqualOptions } from '@src/interfaces/CollectionEqualOptions'
-import { Predicate } from '@src/interfaces/Predicate'
 import { equalFn } from '@src/interfaces/equalFn'
 import { intoChunks } from '@src/utils/intoChunks'
 import { range } from '@src/utils/range'
 import { swap } from '@src/utils/swap'
-import { CollectionConstructor } from '@src/interfaces/CollectionConstrcutor'
 
 let lodashIsEqual: equalFn
 
@@ -19,11 +17,13 @@ try {
  * An utility data structure used within the Discordoo.
  * */
 export class Collection<K = any, V = any> extends Map<K, V> {
-  /**
-   * The Collection() constructor creates {@link Collection} objects.
-   * @param iterable - An Array or other iterable object whose elements are key-value pairs such as [ [ 1, 'one' ], [ 2, 'two' ] ].
-   * */
-  [ 'constructor' ]: CollectionConstructor
+
+  /** The Collection() constructor creates {@link Collection} objects. */
+  constructor(iterable: Iterable<readonly [K, V]>)
+  constructor(entries?: ReadonlyArray<readonly [K, V]> | null)
+  constructor(entries?: any) {
+    super(entries)
+  }
 
   /**
    * Gets element from collection.
@@ -81,41 +81,62 @@ export class Collection<K = any, V = any> extends Map<K, V> {
 
   /**
    * Gets a random value from collection.
+   * @returns - value
    * */
   random(): V
 
   /**
    * Gets a random values from collection.
+   * @param amount - amount of values to get
+   * @returns - array of values
    * */
   random(amount: number): V[]
 
   /**
    * Gets a random values from collection (returnType values option is specified).
+   * @param amount - amount of values to get
+   * @param options - method options
+   * @returns - array of values
    * */
   random<T extends Array<V>>(amount: number, options: CollectionRandomOptions): V[]
 
   /**
    * Gets a random keys from collection (returnType keys option is specified).
+   * @param amount - amount of values to get
+   * @param options - method options
+   * @returns - array of keys
    * */
   random<T extends Array<K>>(amount: number, options: CollectionRandomOptions): K[]
 
   /**
    * Gets a random blocks from collection (returnType blocks option is specified).
+   * @param amount - amount of values to get
+   * @param options - method options
+   * @returns - array of blocks [ Key, Value ]
    * */
   random<T extends Array<[ K, V ]>>(amount: number, options: CollectionRandomOptions): Array<[ K, V ]>
 
   /**
-   * Gets a random value from collection (returnType values option is specified, amount not provided).
+   * Gets a random value from collection (returnType values option is specified, amount not specified).
+   * @param amount - not specified in this case
+   * @param options - method options
+   * @returns - value
    * */
   random<T extends V>(amount: undefined, options: CollectionRandomOptions): V
 
   /**
-   * Gets a random key from collection (returnType keys option is specified, amount not provided).
+   * Gets a random key from collection (returnType keys option is specified, amount not specified).
+   * @param amount - not specified in this case
+   * @param options - method options
+   * @returns - key
    * */
   random<T extends K>(amount: undefined, options: CollectionRandomOptions): K
 
   /**
-   * Gets a random block from collection (returnType block option is specified, amount not provided).
+   * Gets a random block from collection (returnType block option is specified, amount not specified).
+   * @param amount - not specified in this case
+   * @param options - method options
+   * @returns - block [ Key, Value ]
    * */
   random<T extends [ K, V ]>(amount: undefined, options: CollectionRandomOptions): [ K, V ]
 
@@ -190,33 +211,36 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Filters out the elements which don't meet requirements and returns array (default).
    * @param filter - function to use
    * @param options - filter options
+   * @returns - array [ Key, Value ]
    */
   filter<T extends Array<[ K, V ]> = Array<[ K, V ]>>(
-    filter: Predicate<K, V, Collection<K, V>>, options?: CollectionFilterOptions
+    filter: (value: V, key: K, collection: Collection<K, V>) => boolean, options?: CollectionFilterOptions
   ): Array<[ K, V ]>
-
-  /**
-   * Filters out the elements which don't meet requirements and returns map (return map option is specified).
-   * @param filter - function to use
-   * @param options - filter options
-   */
-  filter<T extends Map<K, V> = Map<K, V>>(
-    filter: Predicate<K, V, Collection<K, V>>, options: CollectionFilterOptions
-  ): Map<K, V>
 
   /**
    * Filters out the elements which don't meet requirements and returns collection (return collection option is specified).
    * @param filter - function to use
    * @param options - filter options
+   * @returns - collection Key -> Value
    */
   filter<T extends Collection = Collection<K, V>>(
-    filter: Predicate<K, V, Collection<K, V>>, options: CollectionFilterOptions
+    filter:(value: V, key: K, collection: Collection<K, V>) => boolean, options: CollectionFilterOptions
   ): Collection<K, V>
 
+  /**
+   * Filters out the elements which don't meet requirements and returns map (return map option is specified).
+   * @param filter - function to use
+   * @param options - filter options
+   * @returns - map Key -> Value
+   */
+  filter<T extends Map<K, V> = Map<K, V>>(
+    filter: (value: V, key: K, collection: Collection<K, V>) => boolean, options: CollectionFilterOptions
+  ): Map<K, V>
+
   filter(
-    filter: Predicate<K, V, Collection<K, V>>, options: CollectionFilterOptions = {}
+    filter: (value: V, key: K, collection: Collection<K, V>) => boolean, options: CollectionFilterOptions = {}
   ): Collection<K, V> | Array<[ K, V ]> | Map<K, V> {
-    let results, predicate: Predicate<K, V, Collection<K, V>>
+    let results, predicate: (value: V, key: K, collection: Collection<K, V>) => boolean
 
     switch (options.return) {
       case 'map':
@@ -245,7 +269,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Searches to the element in collection and returns it.
    * @param predicate - function to use
    * */
-  find(predicate: Predicate<K, V, Collection<K, V>, boolean>): V | undefined {
+  find(predicate: (value: V, key: K, collection: Collection<K, V>) => boolean): V | undefined {
     for (const [ key, value ] of this.entries()) {
       if (predicate(value, key, this)) return value
     }
@@ -257,7 +281,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Executes a function on each of elements of collection.
    * @param predicate - function to use
    */
-  forEach(predicate: Predicate<K, V, Collection<K, V>>) {
+  forEach(predicate: (value: V, key: K, collection: Collection<K, V>) => unknown) {
     super.forEach((v: V, k: K) => {
       predicate(v, k, this)
     })
@@ -318,7 +342,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Checks if any of values satisfies the condition.
    * @param predicate - function to use
    * */
-  some(predicate: Predicate<K, V, Collection<K, V>, boolean>): boolean {
+  some(predicate: (value: V, key: K, collection: Collection<K, V>) => boolean): boolean {
     for (const [ key, value ] of this.entries()) {
       if (predicate(value, key, this)) {
         return true
@@ -332,7 +356,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Checks if all values satisfy the condition.
    * @param predicate - function to use
    * */
-  every(predicate: Predicate<K, V, Collection<K, V>, boolean>): boolean {
+  every(predicate: (value: V, key: K, collection: Collection<K, V>) => boolean): boolean {
     for (const [ key, value ] of this.entries()) {
       if (!predicate(value, key, this)) {
         return false
@@ -434,7 +458,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Maps each item to another value into an array.
    * @param predicate - function to use
    * */
-  map<T = unknown>(predicate: Predicate<K, V, Collection<K, V>, T>): T[] {
+  map<T = unknown>(predicate: (value: V, key: K, collection: Collection<K, V>) => T): T[] {
     const result: T[] = []
 
     for (const [ key, value ] of this.entries()) {
