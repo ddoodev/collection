@@ -170,7 +170,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
     } else {
       const random: number[] = []
 
-      // O(unknown) generation algorithm. works much faster in small collections, but much worse in big.
+      // O(n) generation algorithm, where n = number of for iterations
       // 1. gen
       // 2. if not unique, start from 1. else
       // 3. push to random numbers array
