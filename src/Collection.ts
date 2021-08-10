@@ -25,6 +25,10 @@ export class Collection<K = any, V = any> extends Map<K, V> {
     super(entries)
   }
 
+  get [Symbol.species]() {
+    return this.constructor
+  }
+
   /**
    * Gets element from collection.
    * @param key - key of element
@@ -214,7 +218,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * @returns - array [ Key, Value ]
    */
   filter<T extends Array<[ K, V ]> = Array<[ K, V ]>>(
-    filter: (value: V, key: K, collection: Collection<K, V>) => boolean, options?: CollectionFilterOptions
+    filter: (value: V, key: K, collection: this) => boolean, options?: CollectionFilterOptions
   ): Array<[ K, V ]>
 
   /**
@@ -223,9 +227,9 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * @param options - filter options
    * @returns - collection Key -> Value
    */
-  filter<T extends Collection = Collection<K, V>>(
-    filter:(value: V, key: K, collection: Collection<K, V>) => boolean, options: CollectionFilterOptions
-  ): Collection<K, V>
+  filter<T extends Collection = this>(
+    filter: (value: V, key: K, collection: this) => boolean, options: CollectionFilterOptions
+  ): this
 
   /**
    * Filters out the elements which don't meet requirements and returns map (return map option is specified).
@@ -234,13 +238,13 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * @returns - map Key -> Value
    */
   filter<T extends Map<K, V> = Map<K, V>>(
-    filter: (value: V, key: K, collection: Collection<K, V>) => boolean, options: CollectionFilterOptions
+    filter: (value: V, key: K, collection: this) => boolean, options: CollectionFilterOptions
   ): Map<K, V>
 
   filter(
-    filter: (value: V, key: K, collection: Collection<K, V>) => boolean, options: CollectionFilterOptions = {}
-  ): Collection<K, V> | Array<[ K, V ]> | Map<K, V> {
-    let results, predicate: (value: V, key: K, collection: Collection<K, V>) => boolean
+    filter: (value: V, key: K, collection: this) => boolean, options: CollectionFilterOptions = {}
+  ): this | Array<[ K, V ]> | Map<K, V> {
+    let results, predicate: (value: V, key: K, collection: this) => boolean
 
     switch (options.return) {
       case 'map':
@@ -248,7 +252,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
         predicate = (v, k, c) => filter(v, k, c) && results.set(k, v)
         break
       case 'collection':
-        results = new Collection<K, V>()
+        results = new this.constructor[Symbol.species]<K, V>()
         predicate = (v, k, c) => filter(v, k, c) && results.set(k, v)
         break
       case 'array':
@@ -269,9 +273,21 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Searches to the element in collection and returns it.
    * @param predicate - function to use
    * */
-  find(predicate: (value: V, key: K, collection: Collection<K, V>) => boolean): V | undefined {
+  find(predicate: (value: V, key: K, collection: this) => boolean): V | undefined {
     for (const [ key, value ] of this.entries()) {
       if (predicate(value, key, this)) return value
+    }
+
+    return undefined
+  }
+
+  /**
+   * Searches to the key in collection and returns it.
+   * @param predicate - function to use
+   * */
+  findKey(predicate: (value: V, key: K, collection: this) => boolean): K | undefined {
+    for (const [ key, value ] of this.entries()) {
+      if (predicate(value, key, this)) return key
     }
 
     return undefined
@@ -281,15 +297,15 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Executes a function on each of elements of collection.
    * @param predicate - function to use
    */
-  forEach(predicate: (value: V, key: K, collection: Collection<K, V>) => unknown) {
+  forEach(predicate: (value: V, key: K, collection: this) => any) {
     super.forEach((v: V, k: K) => {
       predicate(v, k, this)
     })
   }
 
   /** Creates a new collection based on this one. */
-  clone(): Collection<K, V> {
-    return new Collection<K, V>([ ...this ])
+  clone(): this {
+    return new this.constructor[Symbol.species]<K, V>(this)
   }
 
   /**
@@ -309,9 +325,8 @@ export class Collection<K = any, V = any> extends Map<K, V> {
     }
 
     for (const [ key, value ] of this.entries()) {
-      switch (true) { // switch is faster than if, so we use it in the loop
-        case !collection.has(key) || !equal(collection.get(key), value):
-          return false
+      if (!collection.has(key) || !equal(collection.get(key), value)) {
+        return false
       }
     }
 
@@ -342,7 +357,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Checks if any of values satisfies the condition.
    * @param predicate - function to use
    * */
-  some(predicate: (value: V, key: K, collection: Collection<K, V>) => boolean): boolean {
+  some(predicate: (value: V, key: K, collection: this) => boolean): boolean {
     for (const [ key, value ] of this.entries()) {
       if (predicate(value, key, this)) {
         return true
@@ -356,7 +371,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Checks if all values satisfy the condition.
    * @param predicate - function to use
    * */
-  every(predicate: (value: V, key: K, collection: Collection<K, V>) => boolean): boolean {
+  every(predicate: (value: V, key: K, collection: this) => boolean): boolean {
     for (const [ key, value ] of this.entries()) {
       if (!predicate(value, key, this)) {
         return false
@@ -458,7 +473,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Maps each item to another value into an array.
    * @param predicate - function to use
    * */
-  map<T = unknown>(predicate: (value: V, key: K, collection: Collection<K, V>) => T): T[] {
+  map<T = any>(predicate: (value: V, key: K, collection: this) => T): T[] {
     const result: T[] = []
 
     for (const [ key, value ] of this.entries()) {
@@ -468,12 +483,31 @@ export class Collection<K = any, V = any> extends Map<K, V> {
     return result
   }
 
+  reduce<T = any>(predicate: (accumulator: T, value: V, key: K, collection: this) => T, initialValue?: T): T {
+    const entries = this.entries(),
+      first = entries.next().value
+
+    let result: any = initialValue
+
+    if (result !== undefined) {
+      result = predicate(result, first[1], first[0], this)
+    } else {
+      result = first
+    }
+
+    for (const [ key, value ] of entries) {
+      result = predicate(result, value, key, this)
+    }
+
+    return result
+  }
+
   /**
   * Returns a collection chunked into several collections.
   * @param size - chunk size
   * */
-  intoChunks(size?: number): Collection<K, V>[] {
-    return intoChunks<[K, V]>([ ...this.entries() ], size)
-      .map(e => new Collection(e))
+  intoChunks(size?: number): this[] {
+    return intoChunks<[K, V]>([ ...this ], size)
+      .map(e => new this.constructor[Symbol.species]<K, V>(e))
   }
 }
