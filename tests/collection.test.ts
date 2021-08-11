@@ -2,6 +2,7 @@ import { Collection } from '@src/Collection'
 
 describe('Collection', () => {
   const collection = new Collection()
+
   collection.set(1, '2').set(3, '4').set(5, '6')
 
   test('must contain 3 elements', () => {
