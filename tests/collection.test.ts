@@ -308,4 +308,5 @@ describe('Collection', () => {
       collection.map(v => v)
     ).toEqual([ '2', '4', '6' ])
   })
+
 })
