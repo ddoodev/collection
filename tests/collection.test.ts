@@ -153,7 +153,7 @@ describe('Collection', () => {
 
     expect(
       collection.intoChunks(1).every(v => v instanceof Collection)
-    )
+    ).toBe(true)
   })
 
   test('must return first key', () => {
@@ -245,13 +245,13 @@ describe('Collection', () => {
   test('some must work', () => {
     expect(
       collection.some(v => v === '6')
-    )
+    ).toBe(true)
   })
 
   test('every must work', () => {
     expect(
       collection.every(v => [ '2', '4', '6' ].includes(v))
-    )
+    ).toBe(true)
   })
 
   test('equal must work', () => {
