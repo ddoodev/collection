@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/Discordoo/collection/issues"
   },
-  "homepage": "https://docs.discordoo.xyz/collection/",
+  "homepage": "https://docs.discordoo.xyz/collection",
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
