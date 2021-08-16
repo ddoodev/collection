@@ -540,7 +540,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
     try {
       collection = new Collection<K, V>(JSON.parse(stringFormat))
     } catch (e) {
-      throw new Error('Collection#fromString: input string does not match the \'[[k1, v1],[k2, v2],...]\'-like format' + '\n' + e)
+      throw new Error('Collection#fromStringFormat: input string does not match the \'[[k1, v1],[k2, v2],...]\'-like format' + '\n' + e)
     }
 
     return collection
