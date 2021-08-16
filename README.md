@@ -2,12 +2,12 @@
 A utility data structure used within the Discordoo, Discord API library.
 
 ## About
-Collection was created for use inside Discordoo, for storing the cache in it and for convenient interaction with local lists.
+[Collection](https://docs.discordoo.xyz/collection/) was created for use inside Discordoo, for storing the cache in it and for convenient interaction with local lists.
 
 We decided to put the Collection in a separate repository, so that third-party developers can use it without installing the entire Discordoo.
 
 ## Quick Reference
-* [Collection API Documentation](https://docs.discordoo.xyz/collection)
+* [Collection API Documentation](https://docs.discordoo.xyz/collection/classes/Collection/)
 * Optionally lodash can be installed for deep equal processing
 * Node.js 12.0.0 or newer required
 
