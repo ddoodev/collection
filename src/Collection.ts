@@ -522,4 +522,27 @@ export class Collection<K = any, V = any> extends Map<K, V> {
     return intoChunks<[K, V]>([ ...this ], size)
       .map(e => new this.constructor[Symbol.species]<K, V>(e))
   }
+
+  /**
+   * Returns a string in a '[[k1, v1],[k2, v2],...]'-like format representing a Collection.
+   * */
+  toStringFormat(): string {
+    return JSON.stringify(Array.from(this.entries()))
+  }
+
+  /**
+   * Creates a collection from the string like '[[k1, v1],[k2, v2],...]' format.
+   * @param stringFormat - a string to create a collection from
+   * */
+  static fromStringFormat<K = any, V = any>(stringFormat: string): Collection<K, V> {
+    let collection: Collection<K, V>
+
+    try {
+      collection = new Collection<K, V>(JSON.parse(stringFormat))
+    } catch (e) {
+      throw new Error('Collection#fromString: input string does not match the \'[[k1, v1],[k2, v2],...]\'-like format' + '\n' + e)
+    }
+
+    return collection
+  }
 }
