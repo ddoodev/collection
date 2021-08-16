@@ -1,3 +1,33 @@
+<p align="center">
+<img width="420" src="https://user-images.githubusercontent.com/44965055/118376907-70cad500-b5d3-11eb-95c2-3397a3882163.png" alt="">
+</p>
+
+<p align="center">
+  <b>
+    Discord bots. Simplified and boosted
+    <span> · </span>
+    <a href="https://docs.discordoo.xyz/collection/">Docs</a>
+    <span> · </span>
+    <a href="https://github.com/Discordoo/discordoo/blob/develop/CONTRIBUTING.md">Contribute</a>
+  </b>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Discordoo/collection/actions">
+    <img src="https://github.com/Discordoo/collection/workflows/Tests/badge.svg" alt="Testing status" />
+  </a>
+  <a href="https://github.com/Discordoo/collection/actions">
+    <img src="https://github.com/Discordoo/collection/workflows/Lint/badge.svg" alt="Linting status" />
+  </a>
+  <a href="https://discord.gg/TFZtXeYVM5">
+    <img 
+      src="https://img.shields.io/discord/811663819721539674?color=7280DA&label=Discord&logo=discord&logoColor=white" 
+      alt="Online"
+    >
+  </a>
+</p>
+<hr>
+
 # Discordoo Collection
 A utility data structure used within the Discordoo, Discord API library.
 
