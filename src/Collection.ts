@@ -18,14 +18,19 @@ try {
  * */
 export class Collection<K = any, V = any> extends Map<K, V> {
 
-  /** The Collection() constructor creates {@link Collection} objects. */
+  /**
+   * The Collection() constructor creates {@link Collection} objects.
+   * */
   constructor(iterable: Iterable<readonly [K, V]>)
   constructor(entries?: ReadonlyArray<readonly [K, V]> | null)
   constructor(entries?: any) {
     super(entries)
   }
 
-  get [Symbol.species]() {
+  /*
+  * Overwrites species to the parent Map constructor.
+  * */
+  get [Symbol.species](): Function {
     return this.constructor
   }
 
@@ -65,19 +70,19 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   /**
    * Removes all elements from the collection.
    * */
-  clear() {
+  clear(): void {
     return super.clear()
   }
 
   /**
-   * The amount of elements in this collection.
+   * Gets the amount of elements in this collection.
    * */
   get size(): number {
     return super.size
   }
 
   /**
-   * The collection is empty or not.
+   * Checks if the collection is empty or not.
    * */
   get empty(): boolean {
     return this.size === 0
@@ -270,7 +275,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Searches to the element in collection and returns it.
+   * Searches for the element in collection and returns it.
    * @param predicate - function to use
    * */
   find(predicate: (value: V, key: K, collection: this) => boolean): V | undefined {
@@ -282,7 +287,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-   * Searches to the key in collection and returns it.
+   * Searches for the key in collection and returns it.
    * @param predicate - function to use
    * */
   findKey(predicate: (value: V, key: K, collection: this) => boolean): K | undefined {
@@ -297,13 +302,15 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Executes a function on each of elements of collection.
    * @param predicate - function to use
    */
-  forEach(predicate: (value: V, key: K, collection: this) => any) {
+  forEach(predicate: (value: V, key: K, collection: this) => any): void {
     super.forEach((v: V, k: K) => {
       predicate(v, k, this)
     })
   }
 
-  /** Creates a new collection based on this one. */
+  /**
+   * Creates a new collection based on this one.
+   * */
   clone(): this {
     return new this.constructor[Symbol.species]<K, V>(this)
   }
@@ -483,6 +490,11 @@ export class Collection<K = any, V = any> extends Map<K, V> {
     return result
   }
 
+  /**
+   * Executes a predicate function on each element of the collection, resulting in a single output value.
+   * @param predicate - function to use
+   * @param initialValue - initial value for the accumulator
+   * */
   reduce<T = any>(predicate: (accumulator: T, value: V, key: K, collection: this) => T, initialValue?: T): T {
     const entries = this.entries(),
       first = entries.next().value
@@ -503,9 +515,9 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
-  * Returns a collection chunked into several collections.
-  * @param size - chunk size
-  * */
+   * Returns a collection chunked into several collections.
+   * @param size - chunk size
+   * */
   intoChunks(size?: number): this[] {
     return intoChunks<[K, V]>([ ...this ], size)
       .map(e => new this.constructor[Symbol.species]<K, V>(e))
