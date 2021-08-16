@@ -30,7 +30,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   /*
   * Overwrites species to the parent Map constructor.
   * */
-  get [Symbol.species](): Function {
+  get [Symbol.species]() {
     return this.constructor
   }
 
