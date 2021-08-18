@@ -127,7 +127,7 @@ collection.random<Array<[ K, V ]>>(5, { returnType: 'blocks' }) // tell typescri
 ```
 
 
-## D.js collection VS ddoo collection speed tests
+## Discord.js collection VS ddoo collection speed tests
 Discord.js is the most popular library for developing bots, so we will compare with it.
 (if you're interested, ddoo is roughly comparable to eris in collection speed)
 
