@@ -1,2 +1,2 @@
-export { CollectionEqualOptions } from '@src/interfaces/CollectionEqualOptions'
+export * from '@src/interfaces'
 export { Collection } from './Collection'
