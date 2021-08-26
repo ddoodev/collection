@@ -1,5 +1,5 @@
 <p align="center">
-<img width="420" src="https://user-images.githubusercontent.com/44965055/129632446-c76f8444-1e57-4afe-b7ae-fb5546fa6f33.png" alt="">
+  <a href="https://docs.discordoo.xyz/collection/"><img width="420" src="https://user-images.githubusercontent.com/44965055/129632446-c76f8444-1e57-4afe-b7ae-fb5546fa6f33.png" alt=""></a>
 </p>
 
 <p align="center">
