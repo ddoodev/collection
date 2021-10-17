@@ -220,7 +220,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Filters out the elements which don't meet requirements and returns array (default).
    * @param filter - function to use
    * @param options - filter options
-   * @returns - array [ Key, Value ]
+   * @returns - array of [ Key, Value ]
    */
   filter<T extends Array<[ K, V ]> = Array<[ K, V ]>>(
     filter: (value: V, key: K, collection: this) => boolean, options?: CollectionFilterOptions
