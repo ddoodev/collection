@@ -7,7 +7,7 @@
   "type": "commonjs",
   "scripts": {
     "build": "ttsc -p tsconfig.json",
-    "docs": "npx typedoc && npx tapok ../docs/docs/collection",
+    "docs": "npx tapok ./docs.json -c typedoc.js",
     "lint": "eslint tests src",
     "lint:fix": "eslint tests src --fix",
     "test": "jest",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@discordoo/tapok": "^1.0.9",
+    "@discordoo/tapok": "^2.0.0",
     "@types/jest": "^26.0.24",
     "@types/node": "^12.0.0",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
@@ -41,8 +41,6 @@
     "ts-node": "^10.1.0",
     "tslib": "^2.3.0",
     "ttypescript": "^1.5.12",
-    "typedoc": "^0.22.6",
-    "typedoc-plugin-markdown": "^3.11.3",
     "typescript": "^4.3.5"
   },
   "engines": {

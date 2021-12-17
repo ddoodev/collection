@@ -1,7 +1,6 @@
 module.exports = {
   entryPoints: [ './src/index.ts' ],
-  out: '../docs/docs/collection',
+  json: './docs.json',
   name: 'Collection',
-  readme: './README.md',
   excludeExternals: true,
 }
