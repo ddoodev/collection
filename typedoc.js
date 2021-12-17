@@ -1,6 +1,5 @@
 module.exports = {
-  entryPoints: [ './src/index.ts' ],
-  json: './docs.json',
+  json: './docs/docs.json',
   name: 'Collection',
   excludeExternals: true,
 }

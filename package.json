@@ -1,13 +1,13 @@
 {
   "name": "@discordoo/collection",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "An utility data structure used within the Discordoo.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "type": "commonjs",
   "scripts": {
     "build": "ttsc -p tsconfig.json",
-    "docs": "npx tapok ./docs.json -c typedoc.js",
+    "docs": "npx tapok ./docs/docs.json -c typedoc.js -e ./src/index.ts",
     "lint": "eslint tests src",
     "lint:fix": "eslint tests src --fix",
     "test": "jest",
@@ -27,9 +27,8 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@discordoo/tapok": "^2.0.0",
+    "@discordoo/tapok": "^2.0.1",
     "@types/jest": "^26.0.24",
-    "@types/node": "^12.0.0",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "@zerollup/ts-transform-paths": "^1.7.18",
@@ -39,11 +38,14 @@
     "lodash": "^4.17.21",
     "ts-jest": "^27.0.3",
     "ts-node": "^10.1.0",
-    "tslib": "^2.3.0",
     "ttypescript": "^1.5.12",
     "typescript": "^4.3.5"
   },
   "engines": {
     "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "@types/node": "^12.0.0",
+    "tslib": "^2.3.1"
   }
 }
