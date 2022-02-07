@@ -1,12 +1,12 @@
 <p align="center">
-  <a href="https://docs.discordoo.xyz/collection/"><img width="520" src="https://cdn.discordapp.com/attachments/531549268033404928/891043294337982575/ddoologo_new_1.2_banner_collection.svg" alt=""></a>
+  <a href="https://ddoo.dev/coll"><img width="520" src="https://cdn.discordapp.com/attachments/531549268033404928/891043294337982575/ddoologo_new_1.2_banner_collection.svg" alt=""></a>
 </p>
 
 <p align="center">
   <b>
     Discord bots. Simplified and boosted
     <span> · </span>
-    <a href="https://docs.discordoo.xyz/collection/">Docs</a>
+    <a href="https://ddoo.dev/coll">Docs</a>
     <span> · </span>
     <a href="https://github.com/Discordoo/discordoo/blob/develop/CONTRIBUTING.md">Contribute</a>
   </b>
@@ -19,7 +19,7 @@
   <a href="https://github.com/Discordoo/collection/actions">
     <img src="https://github.com/Discordoo/collection/workflows/Lint/badge.svg" alt="Linting status" />
   </a>
-  <a href="https://discord.gg/eHC8ynn2H3">
+  <a href="https://ddoo.dev/discord">
     <img 
       src="https://img.shields.io/discord/811663819721539674?color=7280DA&label=Discord&logo=discord&logoColor=white" 
       alt="Online"
@@ -32,12 +32,12 @@
 A utility data structure used within the Discordoo, Discord API library.
 
 ## About
-[Collection](https://docs.discordoo.xyz/collection/) was created for use inside Discordoo, for storing the cache in it and for convenient interaction with local lists.
+[Collection](https://ddoo.dev/coll) was created for use inside Discordoo, for storing the cache in it and for convenient interaction with local lists.
 
 We decided to put the Collection in a separate repository, so that third-party developers can use it without installing the entire Discordoo.
 
 ## Quick Reference
-* [Collection API Documentation](https://docs.discordoo.xyz/collection/classes/Collection/)
+* [Collection API Documentation](https://ddoo.dev/coll)
 * Optionally lodash can be installed for deep equal processing
 * Node.js 12.0.0 or newer required
 
