@@ -7,7 +7,6 @@ import { range } from '@src/utils/range'
 import { swap } from '@src/utils/swap'
 
 let lodashIsEqual: equalFn
-
 try {
   lodashIsEqual = require('lodash/isEqual')
 } catch (e) {} // eslint-disable-line no-empty
