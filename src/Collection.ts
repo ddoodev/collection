@@ -11,7 +11,6 @@ try {
   lodashIsEqual = require('lodash/isEqual')
 } catch (e) {} // eslint-disable-line no-empty
 
-
 /**
  * An utility data structure used within the Discordoo.
  * */
