@@ -8,16 +8,16 @@
     <span> · </span>
     <a href="https://ddoo.dev/coll">Docs</a>
     <span> · </span>
-    <a href="https://github.com/Discordoo/discordoo/blob/develop/CONTRIBUTING.md">Contribute</a>
+    <a href="https://github.com/ddoodev/discordoo/blob/develop/CONTRIBUTING.md">Contribute</a>
   </b>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Discordoo/collection/actions">
-    <img src="https://github.com/Discordoo/collection/workflows/Tests/badge.svg" alt="Testing status" />
+  <a href="https://github.com/ddoodev/collection/actions">
+    <img src="https://github.com/ddoodev/collection/workflows/Tests/badge.svg" alt="Testing status" />
   </a>
-  <a href="https://github.com/Discordoo/collection/actions">
-    <img src="https://github.com/Discordoo/collection/workflows/Lint/badge.svg" alt="Linting status" />
+  <a href="https://github.com/ddoodev/collection/actions">
+    <img src="https://github.com/ddoodev/collection/workflows/Lint/badge.svg" alt="Linting status" />
   </a>
   <a href="https://ddoo.dev/discord">
     <img 

@@ -1,6 +1,6 @@
 {
   "name": "@discordoo/collection",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "An utility data structure used within the Discordoo.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -16,12 +16,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Discordoo/collection.git"
+    "url": "git+https://github.com/ddoodev/collection.git"
   },
   "author": "Mirdukkk",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Discordoo/collection/issues"
+    "url": "https://github.com/ddoodev/collection/issues"
   },
   "homepage": "https://ddoo.dev/coll",
   "devDependencies": {
