@@ -249,7 +249,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   ): this | Array<[ K, V ]> | Map<K, V> {
     let results, predicate: (value: V, key: K, collection: this) => boolean
 
-    switch (options.return) {
+    switch (options.returnType) {
       case 'map':
         results = new Map<K, V>()
         predicate = (v, k, c) => filter(v, k, c) && results.set(k, v)
