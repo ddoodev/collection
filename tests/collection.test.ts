@@ -13,13 +13,13 @@ describe('Collection', () => {
 
   test('must filter values and return collection', () => {
     expect(
-      collection.filter<Collection>(value => value === '4', { return: 'collection' }).size
+      collection.filter<Collection>(value => value === '4', { returnType: 'collection' }).size
     ).toBe(1)
   })
 
   test('must filter values and return array', () => {
     expect(
-      collection.filter<Array<any>>(value => value === '4', { return: 'array' }).length
+      collection.filter<Array<any>>(value => value === '4', { returnType: 'array' }).length
     ).toBe(1)
   })
 
