@@ -79,9 +79,9 @@ filtered.forEach(v => console.log(v[1])) // log all values of filtered elements
 const fn = (value, key, collection) => key % 2 !== 0
 
 // also you can choose in wich format return filtered values
-collection.filter(fn, { return: 'map' }) // return data stored in javascript Map
-collection.filter(fn, { return: 'collection' }) // return data stored in collection
-collection.filter(fn, { return: 'array' }) // return data stored in array (default)
+collection.filter(fn, { returnType: 'map' }) // return data stored in javascript Map
+collection.filter(fn, { returnType: 'collection' }) // return data stored in collection
+collection.filter(fn, { returnType: 'array' }) // return data stored in array (default)
 ```
 
 #### How to use filter option 'return' for typescript users:
