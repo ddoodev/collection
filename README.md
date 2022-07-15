@@ -44,6 +44,7 @@ We decided to put the Collection in a separate repository, so that third-party d
 ## Examples
 
 #### How to use collection filter:
+
 ```js
 import { Collection } from '@discordoo/collection'
 
@@ -90,9 +91,9 @@ import { Collection } from '@discordoo/collection'
 
 const collection = new Collection(), fn = () => {}
 
-console.log(collection.filter<Collection>   (fn, { return: 'collection' }).size)
-console.log(collection.filter<Map<any, any>>(fn, { return: 'map' })       .size)
-console.log(collection.filter<Array<any>>   (fn, { return: 'array' })     .length)
+console.log(collection.filter<Collection>   (fn, { returnType: 'collection' }).size)
+console.log(collection.filter<Map<any, any>>(fn, { returnType: 'map' })       .size)
+console.log(collection.filter<Array<any>>   (fn, { returnType: 'array' })     .length)
 console.log(collection.filter(fn).length) // default to Array<[ K, V ]>
 ```
 
