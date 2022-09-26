@@ -11,19 +11,26 @@ try {
   lodashIsEqual = require('lodash/isEqual')
 } catch (e) {} // eslint-disable-line no-empty
 
+
+// inspired by
+// https://github.com/discordjs/discord.js/blob/3c231ae81a52b66940ba495f35fd59a76c65e306/packages/collection/src/collection.ts#L6
+// (MIT license)
+export interface CollectionConstructor {
+  new (): Collection<unknown, unknown>
+  new <K, V>(entries?: readonly (readonly [K, V])[] | null): Collection<K, V>
+  new <K, V>(iterable: Iterable<readonly [K, V]>): Collection<K, V>
+  readonly prototype: Collection<unknown, unknown>
+  readonly [Symbol.species]: CollectionConstructor
+}
+
+export interface Collection<K, V> extends Map<K, V> {
+  constructor: CollectionConstructor
+}
+
 /**
- * An utility data structure used within the Discordoo.
+ * A utility data structure used within the Discordoo.
  * */
 export class Collection<K = any, V = any> extends Map<K, V> {
-
-  /**
-   * The Collection() constructor creates {@link Collection} objects.
-   * */
-  constructor(iterable: Iterable<readonly [K, V]>)
-  constructor(entries?: ReadonlyArray<readonly [K, V]> | null)
-  constructor(entries?: any) {
-    super(entries)
-  }
 
   /*
   * Overwrites species to the parent Map constructor.
@@ -309,8 +316,8 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   /**
    * Creates a new collection based on this one.
    * */
-  clone(): this {
-    return new this.constructor[Symbol.species]<K, V>(this)
+  clone(): Collection<K, V> {
+    return new this.constructor[Symbol.species](this)
   }
 
   /**
@@ -516,7 +523,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
    * Returns a collection chunked into several collections.
    * @param size - chunk size
    * */
-  intoChunks(size?: number): this[] {
+  intoChunks(size?: number): Collection<K, V>[] {
     return intoChunks<[K, V]>([ ...this ], size)
       .map(e => new this.constructor[Symbol.species]<K, V>(e))
   }

@@ -1,7 +1,7 @@
 import { Collection } from '@src/Collection'
 
 describe('Collection', () => {
-  const collection = new Collection()
+  const collection = new Collection<number, string>()
 
   collection.set(1, '2').set(3, '4').set(5, '6')
 
