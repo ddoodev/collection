@@ -1,2 +1,2 @@
-export * from '@src/interfaces'
+export * from './interfaces'
 export { Collection } from './Collection'
