@@ -310,4 +310,10 @@ describe('Collection', () => {
     ).toEqual([ '2', '4', '6' ])
   })
 
+  test('flat map', () => {
+    expect(
+      collection.flatMap(v => [ v, v ])
+    ).toEqual([ '2', '2', '4', '4', '6', '6' ])
+  })
+
 })
