@@ -496,6 +496,20 @@ export class Collection<K = any, V = any> extends Map<K, V> {
   }
 
   /**
+   * Maps each item to another value into an array, then flattens it.
+   * @param predicate - function to use
+   */
+  flatMap<T = any>(predicate: (value: V, key: K, collection: this) => T[]): T[] {
+    const result: T[] = []
+
+    for (const [ key, value ] of this.entries()) {
+      result.push(...predicate(value, key, this))
+    }
+
+    return result
+  }
+
+  /**
    * Executes a predicate function on each element of the collection, resulting in a single output value.
    * @param predicate - function to use
    * @param initialValue - initial value for the accumulator

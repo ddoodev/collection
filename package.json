@@ -1,6 +1,6 @@
 {
   "name": "@discordoo/collection",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "An utility data structure used within the Discordoo.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -38,8 +38,8 @@
     "lodash": "4.17.21",
     "ts-jest": "27.0.3",
     "ts-node": "10.1.0",
-    "ttypescript": "1.5.12",
-    "typescript": "4.3.5"
+    "ttypescript": "1.5.13",
+    "typescript": "4.4.4"
   },
   "engines": {
     "node": ">=12.0.0"
