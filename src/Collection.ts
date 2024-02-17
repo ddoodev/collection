@@ -523,7 +523,7 @@ export class Collection<K = any, V = any> extends Map<K, V> {
     if (result !== undefined) {
       result = predicate(result, first[1], first[0], this)
     } else {
-      result = first
+      result = first[1]
     }
 
     for (const [ key, value ] of entries) {

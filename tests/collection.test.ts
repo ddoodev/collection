@@ -143,6 +143,14 @@ describe('Collection', () => {
     ).toBe('246')
   })
 
+  test('must reduce values without initial value', () => {
+    expect(
+      collection.reduce<string>((prev, currValue) => {
+        return prev + currValue
+      })
+    ).toBe('246')
+  })
+
   test('must split into chunks', () => {
     expect(
       collection.intoChunks(1).length
